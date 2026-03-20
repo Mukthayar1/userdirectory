@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
         return users.filter(user =>
             user.name.toLowerCase().includes(search.toLowerCase())
         );
-    }, [users]);
+    }, [users, search]);
 
     const handleRetry = useCallback(() => {
         dispatch(fetchUsers(setRefreshing, 1, false));

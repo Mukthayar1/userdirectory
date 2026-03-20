@@ -54,6 +54,7 @@ const LoginScreen = () => {
                 onChangeText={onChange}
                 keyboardType="email-address"
                 autoCapitalize="none"
+                placeholderTextColor={colors.lightGrey}
               />
             )}
           />
@@ -80,6 +81,7 @@ const LoginScreen = () => {
                 value={value}
                 onChangeText={onChange}
                 secureTextEntry
+                placeholderTextColor={colors.lightGrey}
               />
             )}
           />
@@ -136,6 +138,7 @@ const styles = StyleSheet.create({
     fontSize: textScale(16),
     borderWidth: 1,
     borderColor: colors.lightGrey,
+    color:"#000"
   },
   inputError: {
     borderColor: colors.red,
