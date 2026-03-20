@@ -8,13 +8,7 @@ npm install
 ```
 
 ## Run the app
-
-Start Metro first:
-```sh
-npm start
-```
-
-Then in a new terminal:
+In a new terminal:
 ```sh
 # Android
 npm run android
