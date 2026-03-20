@@ -34,6 +34,7 @@ const usersSlice = createSlice({
     clearUsers: (state) => {
       state.users = [];
       state.error = null;
+      state.favoriteUserIds = []
     },
   },
 });

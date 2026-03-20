@@ -4,7 +4,8 @@ const initialState = {
   isAuthenticated: false,
   userEmail: null,
   token: null,
-  saveUserInfo: false
+  saveUserInfo: false,
+  lastLogin:null
 };
 
 const authSlice = createSlice({
@@ -16,6 +17,7 @@ const authSlice = createSlice({
       state.userEmail = action.payload.email;
       state.token = action.payload.token;
       state.saveUserInfo = action.payload.rememberMe
+      state.lastLogin = new Date();
     },
     logout: (state) => {
       state.isAuthenticated = false;
@@ -23,6 +25,7 @@ const authSlice = createSlice({
         state.userEmail = null;
       }
       state.token = null;
+       state.lastLogin = null;
     },
   },
 });

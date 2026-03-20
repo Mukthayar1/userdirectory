@@ -29,7 +29,7 @@ const HomeScreen = ({ navigation }) => {
     useFocusEffect(
         useCallback(() => {
             setPage(1);
-            dispatch(fetchUsers(setInitialLoading, 1, false));
+            dispatch(fetchUsers(users?.length > 0 ? setRefreshing : setInitialLoading, 1, false));
         }, [])
     );
 

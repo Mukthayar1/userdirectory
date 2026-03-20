@@ -5,24 +5,13 @@ import { useUsers } from '../../../hooks/useUsers';
 import colors from '../../../constants/colors';
 import { moderateScale, textScale, verticalScale } from '../../../utils/responsive';
 import { heartFillIcon } from '../../../constants/images';
+import { callUser, handleEmailPress, visitWebsite } from '../../../utils/helpers';
 
 const ProfileScreen = ({ route }) => {
 
   const { user } = route.params;
   const { isFavorite, addToFavorites } = useUsers();
   const isUserFavorite = isFavorite(user.id);
-
-  const sendEmail = () => {
-    Linking.openURL(`mailto:${user.email}`);
-  };
-
-  const callUser = () => {
-    Linking.openURL(`tel:${user.phone}`);
-  };
-
-  const visitWebsite = () => {
-    Linking.openURL(`https://${user.website}`);
-  };
 
   const toggleFavorite = () => {
     addToFavorites(user.id);
@@ -47,13 +36,13 @@ const ProfileScreen = ({ route }) => {
 
       <View style={styles.mainBox}>
         <Text style={styles.heading}>Contact</Text>
-        <TouchableOpacity onPress={sendEmail} style={styles.row}>
+        <TouchableOpacity onPress={()=>handleEmailPress(user?.email)} style={styles.row}>
           <Text style={styles.rowText}>{user.email}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={callUser} style={styles.row}>
+        <TouchableOpacity onPress={()=>callUser(user.phone)} style={styles.row}>
           <Text style={styles.rowText}>{user.phone}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={visitWebsite} style={styles.row}>
+        <TouchableOpacity onPress={()=>visitWebsite(user.website)} style={styles.row}>
           <Text style={styles.rowText}>{user.website}</Text>
         </TouchableOpacity>
 
