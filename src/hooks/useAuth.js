@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSuccess, logout } from '../store/redux/slices/authSlice';
+import { loginSuccess, logout } from '../store/redux/actions/authActions';
 
 export const useAuth = () => {
 

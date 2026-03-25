@@ -1,10 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { combineReducers } from 'redux';
+import { thunk } from 'redux-thunk';
 
-import authReducer from './slices/authSlice';
-import usersReducer from './slices/usersSlice';
+import authReducer from './reducers/authReducer';
+import usersReducer from './reducers/usersReducer';
 
 const persistConfig = {
   key: 'root',
@@ -19,12 +19,9 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-});
+export const store = createStore(
+  persistedReducer,
+  applyMiddleware(thunk)
+);
 
 export const persistor = persistStore(store);

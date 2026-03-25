@@ -1,19 +1,27 @@
 import axios from 'axios';
-import { setUsers, setLoading, setError } from '../slices/usersSlice';
 
 const API_URL = 'https://jsonplaceholder.typicode.com/users';
 
 export const fetchUsers = (setLoading, page = 1, isLoadMore = false) => async (dispatch) => {
-  setLoading(true);
   try {
-    const response = await axios.get(`${API_URL}?_page=${page}&_limit=10`);
-    dispatch(setUsers({
-      data: response.data,
-      isLoadMore,
-    }));
-    setLoading(false);
+    setLoading(true)
+    console.log("fetching users")
+    const response = await axios.get(`${API_URL}?_page=${page}&_limit=10`)
+    console.log('response.data', response.data)
+    dispatch({
+      type: 'loadUsers',
+      payload: {
+        data: response.data,
+        isLoadMore,
+      },
+    })
+    setLoading(false)
   } catch (error) {
-    setLoading(false);
-    dispatch(setError(error.message));
+    console.log('error', error)
+    dispatch({
+      type: 'setError',
+      payload: error.message,
+    })
+    setLoading(false)
   }
 };

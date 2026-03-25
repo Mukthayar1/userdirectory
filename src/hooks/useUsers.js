@@ -1,16 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleFavorite } from '../store/redux/slices/usersSlice';
 
 export const useUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector(state => state.users);
 
   const addToFavorites = (userId) => {
-    dispatch(toggleFavorite(userId));
+    dispatch({ type: 'toggleFav', payload: userId })
   };
 
   const isFavorite = (userId) => {
     return users.favoriteUserIds.includes(userId);
+  };
+
+  const clearUsers = () => {
+    dispatch({ type: 'clearUsers' })
   };
 
 
@@ -18,5 +21,6 @@ export const useUsers = () => {
     ...users,
     addToFavorites,
     isFavorite,
+    clearUsers
   };
 };

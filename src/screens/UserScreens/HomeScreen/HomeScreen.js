@@ -9,7 +9,6 @@ import ErrorView from '../../../components/ErrorView/ErrorView';
 import { useAuth } from '../../../hooks/useAuth';
 import { useUsers } from '../../../hooks/useUsers';
 import { fetchUsers } from '../../../store/redux/actions/userActions';
-import { clearUsers } from '../../../store/redux/slices/usersSlice';
 import colors from '../../../constants/colors';
 import { moderateScale, textScale, verticalScale } from '../../../utils/responsive';
 
@@ -17,7 +16,7 @@ const HomeScreen = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const { logoutUser } = useAuth();
-    const { users, error } = useUsers();
+    const { users, error, clearUsers } = useUsers();
 
     const [refreshing, setRefreshing] = useState(false);
     const [initialLoading, setInitialLoading] = useState(false);
@@ -57,7 +56,7 @@ const HomeScreen = ({ navigation }) => {
     }, [dispatch]);
 
     const handleLogout = useCallback(() => {
-        dispatch(clearUsers());
+        clearUsers()
         logoutUser();
     }, [dispatch, logoutUser]);
 
